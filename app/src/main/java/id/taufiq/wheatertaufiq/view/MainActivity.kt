@@ -60,6 +60,11 @@ class MainActivity : AppCompatActivity() {
             val celText = String.format(res.getString(R.string.celcius), celsius)
             tv_temp.text = celText
 
+            // visibility
+            val visibil = weather.visibility / 1000
+            val visibilText = String.format(res.getString(R.string.visibility_persen), visibil)
+            tv_visibility.text = visibilText
+
             // get location
             myViewModel.getLocation(weather.coord.lon, weather.coord.lat)
 
