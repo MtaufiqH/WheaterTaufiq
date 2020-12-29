@@ -38,12 +38,23 @@ class MainActivity : AppCompatActivity() {
         myViewModel.weatherProperty.observe(this, Observer { weather ->
             tv_desc.text = weather.weather[0].description
             tv_status.text = weather.weather[0].main
-            val kelvin = weather.main.temp
-            val celsius = kelvin - KELVIN_CONVERSION
             tv_loc.text = weather.name
 
-            // temp in celcius
             val res = resources
+
+            //FEELS LIKE
+            val feel = weather.main.feelsLike - KELVIN_CONVERSION
+            val feelText = String.format(res.getString(R.string.celcius),feel)
+            tv_feel_like.text = feelText
+
+            // wind speed
+            val speedWind = weather.wind.speed
+            val windSpeedText = String.format(res.getString(R.string.wind_speed),speedWind)
+            tv_speed_wind.text = windSpeedText
+
+            // temp in celcius
+            val kelvin = weather.main.temp
+            val celsius = kelvin - KELVIN_CONVERSION
             val celText = String.format(res.getString(R.string.celcius), celsius)
             tv_temp.text = celText
 
@@ -69,9 +80,4 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-    override fun onResume() {
-        super.onResume()
-        myViewModel.getWeatherApi("Makassar", "cbef379ddf4a2dcb5f352ad82a730e8c")
-    }
 }

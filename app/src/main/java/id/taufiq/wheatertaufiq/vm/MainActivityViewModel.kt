@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import id.taufiq.wheatertaufiq.BuildConfig
 import id.taufiq.wheatertaufiq.api.myWeather
 import id.taufiq.wheatertaufiq.model.WeatherApi
 import kotlinx.coroutines.launch
@@ -17,6 +18,10 @@ import java.util.*
  *
  */
 class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
+
+    init {
+        getWeatherApi("Makassar", BuildConfig.ApiKey)
+    }
 
     private val _weatherProperty = MutableLiveData<WeatherApi>()
     val weatherProperty: LiveData<WeatherApi>
