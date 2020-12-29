@@ -1,10 +1,12 @@
-package id.taufiq.wheatertaufiq
+package id.taufiq.wheatertaufiq.view
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import id.taufiq.wheatertaufiq.BuildConfig
+import id.taufiq.wheatertaufiq.R
 import id.taufiq.wheatertaufiq.vm.MainActivityViewModel
 import id.taufiq.wheatertaufiq.vm.MainActivityViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,7 +28,9 @@ class MainActivity : AppCompatActivity() {
 
         button_search.setOnClickListener {
             val searchCity = et_search_city.text.toString()
-            myViewModel.getWeatherApi(searchCity, BuildConfig.ApiKey)
+            myViewModel.getWeatherApi(searchCity,
+                BuildConfig.ApiKey
+            )
         }
 
 
@@ -41,7 +45,10 @@ class MainActivity : AppCompatActivity() {
             myViewModel.getLocation(weather.coord.lon, weather.coord.lat)
 
             Glide.with(this).run {
-                load(image(weather.sys.country)).into(iv_country)
+                load(image(weather.sys.country))
+                    .placeholder(R.drawable.ic_baseline_broken_image_24)
+                    .into(iv_country)
+                error("Image not available")
             }
 
 

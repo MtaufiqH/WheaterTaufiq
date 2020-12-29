@@ -1,4 +1,4 @@
-package id.taufiq.wheatertaufiq
+package id.taufiq.wheatertaufiq.view
 
 /**
  * Created By Taufiq on 12/28/2020.
