@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WheaterTaufiq</string>
+    <string name="search_by_your_city">Search by your city</string>
+    <string name="weather">Weather</string>
+    <string name="desc">Desc:</string>
+    <string name="country">Country</string>
+    <string name="search">Search</string>
+</resources>
