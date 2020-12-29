@@ -9,6 +9,8 @@ import id.taufiq.wheatertaufiq.vm.MainActivityViewModel
 import id.taufiq.wheatertaufiq.vm.MainActivityViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
+private const val KELVIN_CONVERSION = 273.15
+
 class MainActivity : AppCompatActivity() {
 
     // view models
@@ -31,8 +33,9 @@ class MainActivity : AppCompatActivity() {
         myViewModel.weatherProperty.observe(this, Observer { weather ->
             tv_desc.text = weather.weather[0].description
             tv_status.text = weather.weather[0].main
-            val temp = weather.main.temp
-            tv_temp.text = "$temp °K"
+            val kelvin = weather.main.temp
+            val celcius = kelvin - KELVIN_CONVERSION
+            tv_temp.text = "$celcius °C"
             tv_loc.text = weather.name
 
             myViewModel.getLocation(weather.coord.lon, weather.coord.lat)
