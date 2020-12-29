@@ -8,4 +8,6 @@
     <string name="celcius">%1$,.0f°C</string>
     <string name="wind_speed">%1$,.0f km/h</string>
     <string name="feels_like">Feels Like:</string>
+    <string name="wind">Wind:</string>
+    <string name="flag_image_identity">Flag image identity</string>
 </resources>

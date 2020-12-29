@@ -1,5 +1,6 @@
 package id.taufiq.wheatertaufiq.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import id.taufiq.wheatertaufiq.R
 import id.taufiq.wheatertaufiq.vm.MainActivityViewModel
 import id.taufiq.wheatertaufiq.vm.MainActivityViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 private const val KELVIN_CONVERSION = 273.15
 
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     }
     private val myViewModel: MainActivityViewModel by viewModels { factory }
 
+    @SuppressLint("DefaultLocale")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,12 +39,11 @@ class MainActivity : AppCompatActivity() {
 
 
         myViewModel.weatherProperty.observe(this, Observer { weather ->
-            tv_desc.text = weather.weather[0].description
+            tv_desc.text = weather.weather[0].description.capitalize()
             tv_status.text = weather.weather[0].main
             tv_loc.text = weather.name
 
             val res = resources
-
             //FEELS LIKE
             val feel = weather.main.feelsLike - KELVIN_CONVERSION
             val feelText = String.format(res.getString(R.string.celcius),feel)
@@ -71,7 +73,6 @@ class MainActivity : AppCompatActivity() {
 
 
         })
-
 
 
         myViewModel.weatherLocation.observe(this, Observer {
