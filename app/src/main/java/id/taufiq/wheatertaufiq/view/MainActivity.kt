@@ -28,7 +28,8 @@ class MainActivity : AppCompatActivity() {
 
         button_search.setOnClickListener {
             val searchCity = et_search_city.text.toString()
-            myViewModel.getWeatherApi(searchCity,
+            myViewModel.getWeatherApi(
+                searchCity,
                 BuildConfig.ApiKey
             )
         }
@@ -38,17 +39,23 @@ class MainActivity : AppCompatActivity() {
             tv_desc.text = weather.weather[0].description
             tv_status.text = weather.weather[0].main
             val kelvin = weather.main.temp
-            val celcius = kelvin - KELVIN_CONVERSION
-            tv_temp.text = "$celcius °C"
+            val celsius = kelvin - KELVIN_CONVERSION
             tv_loc.text = weather.name
 
+            // temp in celcius
+            val res = resources
+            val celText = String.format(res.getString(R.string.celcius), celsius)
+            tv_temp.text = celText
+
+            // get location
             myViewModel.getLocation(weather.coord.lon, weather.coord.lat)
 
+
+            // show location by flag
             Glide.with(this).run {
                 load(image(weather.sys.country))
                     .placeholder(R.drawable.ic_baseline_broken_image_24)
                     .into(iv_country)
-                error("Image not available")
             }
 
 
